@@ -1,0 +1,26 @@
+name: DeathHealNotes
+version: 1.0.0
+main: fr.merrylax.deathhealnotes.DeathHealNotes
+api-version: '1.21'
+author: Merrylax
+description: Death Note & Heal Note Plugin
+
+commands:
+  deathhealnotes:
+    description: Commande principale du plugin
+    aliases:
+      - dhn
+    usage: /deathhealnotes
+
+permissions:
+  deathhealnotes.admin:
+    description: Accès aux commandes administrateur
+    default: op
+
+  deathhealnotes.use:
+    description: Utiliser le Death Note et le Heal Note
+    default: true
+
+  deathhealnotes.immune:
+    description: Immunisé contre le Death Note
+    default: op
