@@ -23,4 +23,4 @@ permissions:
 
   deathhealnotes.immune:
     description: Immunisé contre le Death Note
-    default: op
+    default: false
