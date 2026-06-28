@@ -1,14 +1,11 @@
 package fr.merrylax.deathhealnotes.recipes;
 
+import fr.merrylax.deathhealnotes.DeathHealNotes;
+import fr.merrylax.deathhealnotes.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
-
-
-
-import fr.merrylax.deathhealnotes.DeathHealNotes;
-import fr.merrylax.deathhealnotes.items.ItemManager;
 
 public class RecipeManager {
 
@@ -19,16 +16,15 @@ public class RecipeManager {
         this.plugin = plugin;
         this.itemManager = plugin.getItemManager();
     }
+
     /**
      * Enregistre toutes les recettes du plugin.
      */
     public void registerRecipes() {
-
         registerCursedPageRecipe();
         registerDeathNoteRecipe();
         registerHealNoteRecipe();
         registerBookOfDestinyRecipe();
-
     }
 
     /**
@@ -53,6 +49,8 @@ public class RecipeManager {
         recipe.setIngredient('P', Material.PAPER);
 
         Bukkit.addRecipe(recipe);
+    }
+
     /**
      * Recette du Death Note.
      */
@@ -75,7 +73,6 @@ public class RecipeManager {
         recipe.setIngredient('B', Material.WRITTEN_BOOK);
 
         Bukkit.addRecipe(recipe);
-
     }
 
     /**
@@ -100,7 +97,6 @@ public class RecipeManager {
         recipe.setIngredient('B', Material.GOLDEN_APPLE);
 
         Bukkit.addRecipe(recipe);
-
     }
 
     /**
@@ -125,9 +121,6 @@ public class RecipeManager {
         recipe.setIngredient('B', Material.BOOK);
 
         Bukkit.addRecipe(recipe);
-
     }
 
-}
-    }
 }
