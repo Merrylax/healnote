@@ -1,10 +1,13 @@
 package fr.merrylax.deathhealnotes;
 
+import fr.merrylax.deathhealnotes.items.ItemManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DeathHealNotes extends JavaPlugin {
 
     private static DeathHealNotes instance;
+
+    private ItemManager itemManager;
 
     @Override
     public void onEnable() {
@@ -13,15 +16,17 @@ public final class DeathHealNotes extends JavaPlugin {
 
         saveDefaultConfig();
 
+        itemManager = new ItemManager(this);
+
         getLogger().info("========================================");
         getLogger().info("DeathHealNotes est activé !");
         getLogger().info("Version : " + getDescription().getVersion());
         getLogger().info("Développeur : Merrylax");
         getLogger().info("========================================");
 
-        // TODO : Enregistrement des commandes
-        // TODO : Enregistrement des événements
         // TODO : Chargement des recettes
+        // TODO : Enregistrement des événements
+        // TODO : Enregistrement des commandes
         // TODO : Chargement des données
 
     }
@@ -37,6 +42,10 @@ public final class DeathHealNotes extends JavaPlugin {
 
     public static DeathHealNotes getInstance() {
         return instance;
+    }
+
+    public ItemManager getItemManager() {
+        return itemManager;
     }
 
 }
