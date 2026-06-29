@@ -1,5 +1,8 @@
 package fr.merrylax.deathhealnotes.listeners;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +18,8 @@ public class DeathNoteListener implements Listener {
     private final DeathHealNotes plugin;
     private final ItemManager itemManager;
     private final DeathManager deathManager;
-
+    private final Set<UUID> editingPlayers = new HashSet<>();
+    
     public DeathNoteListener(DeathHealNotes plugin) {
 
         this.plugin = plugin;
@@ -46,8 +50,20 @@ public class DeathNoteListener implements Listener {
         }
 
         event.setCancelled(true);
-
-        // TODO :
-        // Ici, nous ouvrirons le Death Note.
+        startEditing(player);
+        player.openBook(item);
+// TODO : ouvrir le Death Note.
+    
     }
+public boolean isEditing(Player player) {
+    return editingPlayers.contains(player.getUniqueId());
+}
+
+public void startEditing(Player player) {
+    editingPlayers.add(player.getUniqueId());
+}
+
+public void stopEditing(Player player) {
+    editingPlayers.remove(player.getUniqueId());
+}
 }
