@@ -113,7 +113,7 @@ public class DeathManager {
             return;
         }
 
-        player.setHealth(0.0);
+        forceKill(player);
 
         condemnedPlayer.setActive(false);
 
@@ -156,5 +156,14 @@ public boolean healPlayer(UUID victim) {
     condemnedPlayers.remove(victim);
 
     return true;
+}
+public void forceKill(Player player) {
+
+    if (player == null) {
+        return;
+    }
+
+    player.setHealth(0.0);
+
 }
 }
