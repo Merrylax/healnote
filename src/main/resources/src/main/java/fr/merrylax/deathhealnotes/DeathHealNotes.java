@@ -1,6 +1,9 @@
 package fr.merrylax.deathhealnotes;
 
 import fr.merrylax.deathhealnotes.items.ItemManager;
+import fr.merrylax.deathhealnotes.listeners.BookListener;
+import fr.merrylax.deathhealnotes.listeners.DeathNoteListener;
+import fr.merrylax.deathhealnotes.listeners.HealNoteListener;
 import fr.merrylax.deathhealnotes.managers.DeathManager;
 import fr.merrylax.deathhealnotes.recipes.RecipeManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +16,10 @@ public final class DeathHealNotes extends JavaPlugin {
     private RecipeManager recipeManager;
     private DeathManager deathManager;
 
+    private DeathNoteListener deathNoteListener;
+    private BookListener bookListener;
+    private HealNoteListener healNoteListener;
+
     @Override
     public void onEnable() {
 
@@ -20,7 +27,7 @@ public final class DeathHealNotes extends JavaPlugin {
 
         saveDefaultConfig();
 
-        // Gestionnaires
+        // Managers
         itemManager = new ItemManager(this);
 
         recipeManager = new RecipeManager(this);
@@ -29,16 +36,20 @@ public final class DeathHealNotes extends JavaPlugin {
         deathManager = new DeathManager(this);
         deathManager.startTask();
 
+        // Listeners
+        deathNoteListener = new DeathNoteListener(this);
+        bookListener = new BookListener(this);
+        healNoteListener = new HealNoteListener(this);
+
+        getServer().getPluginManager().registerEvents(deathNoteListener, this);
+        getServer().getPluginManager().registerEvents(bookListener, this);
+        getServer().getPluginManager().registerEvents(healNoteListener, this);
+
         getLogger().info("========================================");
         getLogger().info("DeathHealNotes est activé !");
         getLogger().info("Version : " + getDescription().getVersion());
         getLogger().info("Développeur : Merrylax");
         getLogger().info("========================================");
-
-        // TODO : Enregistrement des événements
-        // TODO : Enregistrement des commandes
-        // TODO : Chargement des données
-
     }
 
     @Override
@@ -64,6 +75,18 @@ public final class DeathHealNotes extends JavaPlugin {
 
     public DeathManager getDeathManager() {
         return deathManager;
+    }
+
+    public DeathNoteListener getDeathNoteListener() {
+        return deathNoteListener;
+    }
+
+    public BookListener getBookListener() {
+        return bookListener;
+    }
+
+    public HealNoteListener getHealNoteListener() {
+        return healNoteListener;
     }
 
 }
