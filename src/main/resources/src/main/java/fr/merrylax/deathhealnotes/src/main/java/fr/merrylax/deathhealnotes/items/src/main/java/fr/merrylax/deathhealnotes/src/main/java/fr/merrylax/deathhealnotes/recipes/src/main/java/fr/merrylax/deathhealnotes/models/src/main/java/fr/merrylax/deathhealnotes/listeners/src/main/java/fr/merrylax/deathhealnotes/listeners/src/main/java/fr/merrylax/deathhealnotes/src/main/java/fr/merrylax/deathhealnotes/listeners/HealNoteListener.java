@@ -1,0 +1,43 @@
+package fr.merrylax.deathhealnotes.listeners;
+
+import fr.merrylax.deathhealnotes.DeathHealNotes;
+import fr.merrylax.deathhealnotes.managers.DeathManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerEditBookEvent;
+
+import java.util.List;
+
+public class HealNoteListener implements Listener {
+
+    private final DeathManager deathManager;
+    private final DeathHealNotes plugin;
+
+    public HealNoteListener(DeathHealNotes plugin) {
+        this.plugin = plugin;
+        this.deathManager = plugin.getDeathManager();
+    }
+@EventHandler
+public void onBookEdit(PlayerEditBookEvent event) {
+
+    Player player = event.getPlayer();
+
+    List<String> pages = event.getNewBookMeta().getPages();
+
+    if (pages.isEmpty()) return;
+
+    String targetName = pages.get(0).split("\n")[0];
+
+    Player target = Bukkit.getPlayer(targetName);
+
+    if (target == null) return;
+
+    boolean success = deathManager.healPlayer(target.getUniqueId());
+
+    if (success) {
+        player.sendMessage("§aHeal Note utilisé sur " + target.getName());
+    }
+}
+}
