@@ -1,5 +1,6 @@
 package fr.merrylax.deathhealnotes;
 
+
 import fr.merrylax.deathhealnotes.items.ItemManager;
 import fr.merrylax.deathhealnotes.listeners.BookListener;
 import fr.merrylax.deathhealnotes.listeners.DeathNoteListener;
