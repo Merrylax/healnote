@@ -141,4 +141,20 @@ public class DeathManager {
         return true;
 
     }
+/**
+ * Annule la condamnation d'un joueur.
+ */
+public boolean healPlayer(UUID victim) {
+
+    CondemnedPlayer condemnedPlayer = condemnedPlayers.get(victim);
+
+    if (condemnedPlayer == null || !condemnedPlayer.isActive()) {
+        return false;
+    }
+
+    condemnedPlayer.setActive(false);
+    condemnedPlayers.remove(victim);
+
+    return true;
+}
 }
