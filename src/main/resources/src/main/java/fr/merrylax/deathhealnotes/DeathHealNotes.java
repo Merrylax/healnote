@@ -1,6 +1,6 @@
 package fr.merrylax.deathhealnotes;
 
-
+import fr.merrylax.deathhealnotes.listeners.TotemListener;
 import fr.merrylax.deathhealnotes.items.ItemManager;
 import fr.merrylax.deathhealnotes.listeners.BookListener;
 import fr.merrylax.deathhealnotes.listeners.DeathNoteListener;
@@ -20,8 +20,9 @@ public final class DeathHealNotes extends JavaPlugin {
     private DeathNoteListener deathNoteListener;
     private BookListener bookListener;
     private HealNoteListener healNoteListener;
-
-    @Override
+    private TotemListener totemListener;
+     @Override
+    
     public void onEnable() {
 
         instance = this;
@@ -41,11 +42,13 @@ public final class DeathHealNotes extends JavaPlugin {
         deathNoteListener = new DeathNoteListener(this);
         bookListener = new BookListener(this);
         healNoteListener = new HealNoteListener(this);
-
+        totemListener = new TotemListener(this);
+       
         getServer().getPluginManager().registerEvents(deathNoteListener, this);
         getServer().getPluginManager().registerEvents(bookListener, this);
         getServer().getPluginManager().registerEvents(healNoteListener, this);
-
+        getServer().getPluginManager().registerEvents(totemListener, this);
+        
         getLogger().info("========================================");
         getLogger().info("DeathHealNotes est activé !");
         getLogger().info("Version : " + getDescription().getVersion());
