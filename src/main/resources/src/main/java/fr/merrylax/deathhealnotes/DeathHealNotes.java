@@ -1,6 +1,7 @@
 package fr.merrylax.deathhealnotes;
 
 import fr.merrylax.deathhealnotes.items.ItemManager;
+import fr.merrylax.deathhealnotes.managers.DeathManager;
 import fr.merrylax.deathhealnotes.recipes.RecipeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,6 +11,7 @@ public final class DeathHealNotes extends JavaPlugin {
 
     private ItemManager itemManager;
     private RecipeManager recipeManager;
+    private DeathManager deathManager;
 
     @Override
     public void onEnable() {
@@ -18,10 +20,14 @@ public final class DeathHealNotes extends JavaPlugin {
 
         saveDefaultConfig();
 
+        // Gestionnaires
         itemManager = new ItemManager(this);
 
         recipeManager = new RecipeManager(this);
         recipeManager.registerRecipes();
+
+        deathManager = new DeathManager(this);
+        deathManager.startTask();
 
         getLogger().info("========================================");
         getLogger().info("DeathHealNotes est activé !");
@@ -54,6 +60,10 @@ public final class DeathHealNotes extends JavaPlugin {
 
     public RecipeManager getRecipeManager() {
         return recipeManager;
+    }
+
+    public DeathManager getDeathManager() {
+        return deathManager;
     }
 
 }
