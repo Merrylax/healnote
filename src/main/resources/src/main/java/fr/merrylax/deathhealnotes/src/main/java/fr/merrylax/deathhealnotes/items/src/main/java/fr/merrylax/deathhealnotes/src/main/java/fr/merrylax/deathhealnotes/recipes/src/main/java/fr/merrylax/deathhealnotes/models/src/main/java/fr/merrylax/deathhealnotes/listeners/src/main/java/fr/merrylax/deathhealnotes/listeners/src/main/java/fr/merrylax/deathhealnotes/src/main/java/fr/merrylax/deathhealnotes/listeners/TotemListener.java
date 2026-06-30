@@ -2,6 +2,8 @@ package fr.merrylax.deathhealnotes.listeners;
 
 import fr.merrylax.deathhealnotes.DeathHealNotes;
 import fr.merrylax.deathhealnotes.managers.DeathManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -17,14 +19,24 @@ public class TotemListener implements Listener {
     @EventHandler
     public void onTotem(EntityResurrectEvent event) {
 
-        if (!(event.getEntity() instanceof org.bukkit.entity.Player player)) {
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
 
-        if (deathManager.isCondemned(player.getUniqueId())) {
-            event.setCancelled(true);
+        if (!deathManager.isCondemned(player.getUniqueId())) {
+            return;
         }
 
-    }
+        event.setCancelled(true);
 
+        Bukkit.getScheduler().runTaskLater(
+                DeathHealNotes.getInstance(),
+                () -> {
+                    if (player.isOnline()) {
+                        player.setHealth(0.0);
+                    }
+                },
+                1L
+        );
+    }
 }
