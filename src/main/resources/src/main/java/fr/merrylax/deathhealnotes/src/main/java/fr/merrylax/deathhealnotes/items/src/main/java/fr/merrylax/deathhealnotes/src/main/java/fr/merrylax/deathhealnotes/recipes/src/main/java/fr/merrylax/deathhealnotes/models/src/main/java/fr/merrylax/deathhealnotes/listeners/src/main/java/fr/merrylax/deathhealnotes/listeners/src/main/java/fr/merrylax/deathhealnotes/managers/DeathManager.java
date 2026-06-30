@@ -1,6 +1,11 @@
 package fr.merrylax.deathhealnotes.managers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import fr.merrylax.deathhealnotes.DeathHealNotes;
 import fr.merrylax.deathhealnotes.models.CondemnedPlayer;
@@ -138,6 +143,50 @@ public class DeathManager {
 
         addCondemnation(condemnedPlayer);
 
+        World world = Bukkit.getWorlds().get(0); // monde principal
+
+if (world != null) {
+
+    // 🌙 nuit + orage
+    world.setTime(18000);
+    world.setStorm(true);
+    world.setThundering(true);
+
+    // ⚡ éclairs aléatoires
+    for (Player p : Bukkit.getOnlinePlayers()) {
+        p.playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 1f);
+        p.sendMessage("§4☠ Un Death Note a été utilisé...");
+    }
+
+    // ⏳ retour météo normal après 3 secondes (60 ticks)
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        world.setStorm(false);
+        world.setThundering(false);
+        world.setClearWeatherDuration(6000);
+    }, 60L);
+}
+Player victimPlayer = Bukkit.getPlayer(victim);
+
+if (victimPlayer != null) {
+
+    victimPlayer.getWorld().strikeLightningEffect(victimPlayer.getLocation());
+
+    victimPlayer.getWorld().spawnParticle(
+            org.bukkit.Particle.SMOKE,
+            victimPlayer.getLocation(),
+            50,
+            0.5, 1, 0.5,
+            0.02
+    );
+
+    victimPlayer.sendTitle(
+            "§4☠ DEATH NOTE",
+            "§7Ton nom a été écrit...",
+            10,
+            60,
+            20
+    );
+}       
         return true;
 
     }
