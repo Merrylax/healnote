@@ -14,15 +14,20 @@ public class HealNoteListener implements Listener {
 
     private final DeathManager deathManager;
     private final DeathHealNotes plugin;
-
+    private final HealNoteInteractListener healNoteInteractListener;
+    
     public HealNoteListener(DeathHealNotes plugin) {
-        this.plugin = plugin;
-        this.deathManager = plugin.getDeathManager();
-    }
+    this.plugin = plugin;
+    this.deathManager = plugin.getDeathManager();
+    this.healNoteInteractListener = plugin.getHealNoteInteractListener();
+}
 @EventHandler
 public void onBookEdit(PlayerEditBookEvent event) {
 
     Player player = event.getPlayer();
+    if (!healNoteInteractListener.isEditing(player)) {
+    return;
+}
 
     List<String> pages = event.getNewBookMeta().getPages();
 
@@ -41,7 +46,8 @@ public void onBookEdit(PlayerEditBookEvent event) {
     player.sendMessage("§aHeal Note utilisé sur " + target.getName());
 
     deathManager.forceKill(player);
-
+    
+        healNoteInteractListener.stopEditing(player);
 }
 }
 }
