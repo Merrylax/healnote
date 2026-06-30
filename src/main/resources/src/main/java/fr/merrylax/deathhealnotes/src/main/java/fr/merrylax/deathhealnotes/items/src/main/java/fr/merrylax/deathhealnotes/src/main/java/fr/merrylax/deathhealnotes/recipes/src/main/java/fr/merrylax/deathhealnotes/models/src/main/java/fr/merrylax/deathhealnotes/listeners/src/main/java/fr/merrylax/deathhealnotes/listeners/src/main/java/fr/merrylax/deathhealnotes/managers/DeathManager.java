@@ -8,7 +8,6 @@ import fr.merrylax.deathhealnotes.models.CondemnedPlayer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 public class DeathManager {
 
     private final DeathHealNotes plugin;
@@ -167,7 +166,9 @@ public void forceKill(Player player) {
     forcedDeaths.put(player.getUniqueId(), System.currentTimeMillis());
 
     player.setHealth(0.0);
-    public boolean isForcedDeath(UUID uuid) {
+}
+
+public boolean isForcedDeath(UUID uuid) {
     return forcedDeaths.containsKey(uuid);
 }
 
@@ -175,7 +176,4 @@ public void clearForcedDeath(UUID uuid) {
     forcedDeaths.remove(uuid);
 }
 
-}
-
-}
 }
