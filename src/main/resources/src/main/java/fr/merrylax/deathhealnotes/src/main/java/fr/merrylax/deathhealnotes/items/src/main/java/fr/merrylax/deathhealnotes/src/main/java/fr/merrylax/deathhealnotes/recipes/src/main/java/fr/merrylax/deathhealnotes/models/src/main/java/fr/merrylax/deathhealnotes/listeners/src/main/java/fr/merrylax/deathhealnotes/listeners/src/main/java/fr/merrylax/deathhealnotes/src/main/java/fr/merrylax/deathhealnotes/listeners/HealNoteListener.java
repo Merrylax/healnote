@@ -51,14 +51,6 @@ public void onBookEdit(PlayerEditBookEvent event) {
     player.sendMessage("§aHeal Note utilisé sur " + target.getName());
 
     deathManager.forceKill(player);
-    
-        healNoteInteractListener.stopEditing(player);
-
-        if (success) {
-
-    player.sendMessage("§aHeal Note utilisé sur " + target.getName());
-
-    deathManager.forceKill(player);
 
     healNoteInteractListener.stopEditing(player);
 
@@ -66,7 +58,6 @@ public void onBookEdit(PlayerEditBookEvent event) {
 
     healNoteInteractListener.stopEditing(player);
 
-}
 }
 }
 }
