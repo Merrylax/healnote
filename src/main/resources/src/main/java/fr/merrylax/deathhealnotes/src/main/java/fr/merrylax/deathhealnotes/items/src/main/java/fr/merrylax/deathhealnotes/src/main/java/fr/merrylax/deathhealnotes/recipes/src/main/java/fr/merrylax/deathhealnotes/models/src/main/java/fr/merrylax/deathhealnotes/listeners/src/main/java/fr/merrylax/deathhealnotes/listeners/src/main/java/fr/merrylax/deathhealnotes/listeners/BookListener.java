@@ -93,21 +93,28 @@ if (!success) {
 }
 private long parseTime(String input) {
 
-    input = input.toLowerCase();
+    try {
 
-    if (input.endsWith("s")) {
-        return Long.parseLong(input.replace("s", "")) * 1000;
-    }
+        input = input.toLowerCase();
 
-    if (input.endsWith("m")) {
-        return Long.parseLong(input.replace("m", "")) * 60 * 1000;
-    }
+        if (input.endsWith("s")) {
+            return Long.parseLong(input.replace("s", "")) * 1000;
+        }
 
-    if (input.endsWith("h")) {
-        return Long.parseLong(input.replace("h", "")) * 60 * 60 * 1000;
+        if (input.endsWith("m")) {
+            return Long.parseLong(input.replace("m", "")) * 60 * 1000;
+        }
+
+        if (input.endsWith("h")) {
+            return Long.parseLong(input.replace("h", "")) * 60 * 60 * 1000;
+        }
+
+    } catch (NumberFormatException ignored) {
     }
 
     return -1;
 }
+
+   
 
 }
