@@ -31,14 +31,19 @@ public void onBookEdit(PlayerEditBookEvent event) {
 
     List<String> pages = event.getNewBookMeta().getPages();
 
-    if (pages.isEmpty()) return;
+    if (pages.isEmpty()) {
+    healNoteInteractListener.stopEditing(player);
+    return;
+}
 
     String targetName = pages.get(0).split("\n")[0];
 
     Player target = Bukkit.getPlayer(targetName);
 
-    if (target == null) return;
-
+    if (target == null) {
+    healNoteInteractListener.stopEditing(player);
+    return;
+}
     boolean success = deathManager.healPlayer(target.getUniqueId());
 
     if (success) {
@@ -48,6 +53,20 @@ public void onBookEdit(PlayerEditBookEvent event) {
     deathManager.forceKill(player);
     
         healNoteInteractListener.stopEditing(player);
+
+        if (success) {
+
+    player.sendMessage("§aHeal Note utilisé sur " + target.getName());
+
+    deathManager.forceKill(player);
+
+    healNoteInteractListener.stopEditing(player);
+
+} else {
+
+    healNoteInteractListener.stopEditing(player);
+
+}
 }
 }
 }
