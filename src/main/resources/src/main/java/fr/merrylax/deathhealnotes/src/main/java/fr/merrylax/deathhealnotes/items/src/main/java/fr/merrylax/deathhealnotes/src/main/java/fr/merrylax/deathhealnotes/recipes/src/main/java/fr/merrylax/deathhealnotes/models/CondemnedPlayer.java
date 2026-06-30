@@ -4,65 +4,35 @@ import java.util.UUID;
 
 public class CondemnedPlayer {
 
-    private final UUID condemnationId;
+    private final UUID victim;
+    private final UUID owner;
+    private final long deathTime;
 
-    private final UUID victimUUID;
-    private final UUID ownerUUID;
+    private boolean active = true;
 
-    private final long startTime;
-    private final long endTime;
-
-    private boolean saved;
-
-    public CondemnedPlayer(UUID victimUUID,
-                           UUID ownerUUID,
-                           long startTime,
-                           long endTime) {
-
-        this.condemnationId = UUID.randomUUID();
-
-        this.victimUUID = victimUUID;
-        this.ownerUUID = ownerUUID;
-        this.startTime = startTime;
-        this.endTime = endTime;
-
-        this.saved = false;
+    public CondemnedPlayer(UUID victim, UUID owner, long deathTime) {
+        this.victim = victim;
+        this.owner = owner;
+        this.deathTime = deathTime;
     }
 
-    public UUID getCondemnationId() {
-        return condemnationId;
+    public UUID getVictim() {
+        return victim;
     }
 
-    public UUID getVictimUUID() {
-        return victimUUID;
+    public UUID getOwner() {
+        return owner;
     }
 
-    public UUID getOwnerUUID() {
-        return ownerUUID;
+    public long getDeathTime() {
+        return deathTime;
     }
 
-    public long getStartTime() {
-        return startTime;
+    public boolean isActive() {
+        return active;
     }
 
-    public long getEndTime() {
-        return endTime;
+    public void setActive(boolean active) {
+        this.active = active;
     }
-
-    public boolean isSaved() {
-        return saved;
-    }
-
-    public void setSaved(boolean saved) {
-        this.saved = saved;
-    }
-
-    public long getRemainingTime() {
-        return Math.max(0, endTime - System.currentTimeMillis());
-    }
-
-    public boolean isExpired() {
-        return System.currentTimeMillis() >= endTime;
-    }
-
 }
