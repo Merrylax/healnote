@@ -63,14 +63,15 @@ public class RecipeManager {
                 itemManager.getDeathNote()
         );
 
-        recipe.shape(
-                "PPP",
-                "PBP",
-                "PPP"
-        );
+       recipe.shape(
+    "TNT",
+    "NBN",
+    "TNT"
+);
 
-        recipe.setIngredient('P', Material.PAPER);
-        recipe.setIngredient('B', Material.WRITTEN_BOOK);
+recipe.setIngredient('T', Material.TOTEM_OF_UNDYING);
+recipe.setIngredient('N', Material.PAPER);
+recipe.setIngredient('B', Material.WRITTEN_BOOK); 
 
         Bukkit.addRecipe(recipe);
     }
@@ -88,13 +89,14 @@ public class RecipeManager {
         );
 
         recipe.shape(
-                "PPP",
-                "PBP",
-                "PPP"
-        );
+    "NTN",
+    "TBT",
+    "NTN"
+);
 
-        recipe.setIngredient('P', Material.PAPER);
-        recipe.setIngredient('B', Material.GOLDEN_APPLE);
+recipe.setIngredient('N', Material.PAPER);
+recipe.setIngredient('T', Material.TOTEM_OF_UNDYING);
+recipe.setIngredient('B', Material.BOOK);
 
         Bukkit.addRecipe(recipe);
     }
