@@ -1,5 +1,6 @@
 package fr.merrylax.deathhealnotes;
 
+import fr.merrylax.deathhealnotes.listeners.HealNoteInteractListener;
 import fr.merrylax.deathhealnotes.listeners.TotemListener;
 import fr.merrylax.deathhealnotes.items.ItemManager;
 import fr.merrylax.deathhealnotes.listeners.BookListener;
@@ -16,7 +17,8 @@ public final class DeathHealNotes extends JavaPlugin {
     private ItemManager itemManager;
     private RecipeManager recipeManager;
     private DeathManager deathManager;
-
+    
+    private HealNoteInteractListener healNoteInteractListener;
     private DeathNoteListener deathNoteListener;
     private BookListener bookListener;
     private HealNoteListener healNoteListener;
@@ -43,7 +45,9 @@ public final class DeathHealNotes extends JavaPlugin {
         bookListener = new BookListener(this);
         healNoteListener = new HealNoteListener(this);
         totemListener = new TotemListener(this);
-       
+       healNoteInteractListener = new HealNoteInteractListener(this);
+        
+        getServer().getPluginManager().registerEvents(healNoteInteractListener, this);
         getServer().getPluginManager().registerEvents(deathNoteListener, this);
         getServer().getPluginManager().registerEvents(bookListener, this);
         getServer().getPluginManager().registerEvents(healNoteListener, this);
@@ -92,5 +96,7 @@ public final class DeathHealNotes extends JavaPlugin {
     public HealNoteListener getHealNoteListener() {
         return healNoteListener;
     }
-
+public HealNoteInteractListener getHealNoteInteractListener() {
+    return healNoteInteractListener;
+}
 }
