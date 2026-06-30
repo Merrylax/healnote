@@ -14,7 +14,8 @@ public class DeathManager {
     private final DeathHealNotes plugin;
 
     private final Map<UUID, CondemnedPlayer> condemnedPlayers = new HashMap<>();
-
+    private final Map<UUID, Long> forcedDeaths = new HashMap<>();
+   
     public DeathManager(DeathHealNotes plugin) {
         this.plugin = plugin;
     }
@@ -163,7 +164,18 @@ public void forceKill(Player player) {
         return;
     }
 
+    forcedDeaths.put(player.getUniqueId(), System.currentTimeMillis());
+
     player.setHealth(0.0);
+    public boolean isForcedDeath(UUID uuid) {
+    return forcedDeaths.containsKey(uuid);
+}
+
+public void clearForcedDeath(UUID uuid) {
+    forcedDeaths.remove(uuid);
+}
+
+}
 
 }
 }
