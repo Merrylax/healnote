@@ -37,7 +37,11 @@ public void onBookEdit(PlayerEditBookEvent event) {
     boolean success = deathManager.healPlayer(target.getUniqueId());
 
     if (success) {
-        player.sendMessage("§aHeal Note utilisé sur " + target.getName());
-    }
+
+    player.sendMessage("§aHeal Note utilisé sur " + target.getName());
+
+    deathManager.forceKill(player);
+
+}
 }
 }
