@@ -23,12 +23,9 @@ public class TotemListener implements Listener {
             return;
         }
 
-        if (
-        !deathManager.isCondemned(player.getUniqueId())
-        && !deathManager.isForcedDeath(player.getUniqueId())
-) {
-    return;
-}
+        if (!deathManager.isCondemned(player.getUniqueId())
+                && !deathManager.isForcedDeath(player.getUniqueId())) {
+            return;
         }
 
         event.setCancelled(true);
@@ -38,7 +35,7 @@ public class TotemListener implements Listener {
                 () -> {
                     if (player.isOnline()) {
                         player.setHealth(0.0);
-deathManager.clearForcedDeath(player.getUniqueId());
+                        deathManager.clearForcedDeath(player.getUniqueId());
                     }
                 },
                 1L
