@@ -23,8 +23,8 @@ public final class DeathHealNotes extends JavaPlugin {
     private BookListener bookListener;
     private HealNoteListener healNoteListener;
     private TotemListener totemListener;
-     @Override
-    
+
+    @Override
     public void onEnable() {
 
         instance = this;
@@ -45,7 +45,7 @@ public final class DeathHealNotes extends JavaPlugin {
         bookListener = new BookListener(this);
         healNoteListener = new HealNoteListener(this);
         totemListener = new TotemListener(this);
-       healNoteInteractListener = new HealNoteInteractListener(this);
+        healNoteInteractListener = new HealNoteInteractListener(this);
         
         getServer().getPluginManager().registerEvents(healNoteInteractListener, this);
         getServer().getPluginManager().registerEvents(deathNoteListener, this);
@@ -96,7 +96,12 @@ public final class DeathHealNotes extends JavaPlugin {
     public HealNoteListener getHealNoteListener() {
         return healNoteListener;
     }
-public HealNoteInteractListener getHealNoteInteractListener() {
-    return healNoteInteractListener;
-}
+
+    public TotemListener getTotemListener() {
+        return totemListener;
+    }
+
+    public HealNoteInteractListener getHealNoteInteractListener() {
+        return healNoteInteractListener;
+    }
 }
